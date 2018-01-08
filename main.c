@@ -69,12 +69,17 @@ int main()
 	printf("Le joueur bleu a :\n");
 	afficherListe(monde.bleu);
 
-	enleverUnite(liste, &monde);
-
-	afficheMonde(monde);
+	enleverUnite(monde.bleu->suiv->suiv, &monde);
 
 	printf("Le joueur bleu a :\n");
 	afficherListe(monde.bleu);
+
+	enleverUnite(monde.bleu, &monde);
+
+	printf("Le joueur bleu a :\n");
+	afficherListe(monde.bleu);
+
+	afficheMonde(monde);
 
 	return 0;
 }

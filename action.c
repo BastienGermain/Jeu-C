@@ -54,13 +54,18 @@ void supprimerElementListe(Unite *aSupprime, UListe *liste) {
 		(*liste)->suiv = aSupprime->suiv;
 
 	} else {
+		/* On conserve la valeur d'entrée de la liste */
+		UListe conserve = *liste;
 
 		/* Sinon on boucle jusqu'à arriver à l'unité qui précède celle à supprimer */
 		while (aSupprime != (*liste)->suiv) {
-			*liste = (*liste)->suiv;
+			*liste = (*liste)->suiv; /* !!! ici l'entrée de la liste est modifiée !!! */
 		}
 
 		/* On fait pointer l'unité qui précède sur celle qui suit l'unité à supprimé */
 		(*liste)->suiv = aSupprime->suiv;
+
+		/* On remet la bonne valeur d'entrée pour la liste */
+		*liste = conserve;
 	}
 }
