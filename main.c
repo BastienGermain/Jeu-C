@@ -2,19 +2,6 @@
 #include <stdlib.h>
 #include "header.h"
 
-/* dimension du monde en nombre de cases */
-#define LONG 12
-#define LARG 18
-/* l'origine est en haut à gauche */
-
-#define ROUGE 'R' /* identifiant du premier joueur */ 
-#define BLEU 'B' /* identifiant du deuxieme joueur */
-
-/* les types d'unités */
-#define SERF 's'
-#define GUERRIER 'g'
-
-
 int main()
 {
 	Monde monde;
@@ -71,6 +58,23 @@ int main()
 	}
 
 	afficheMonde(monde);
+
+	deplacerUnite(liste, &monde, 2, 0);
+
+	afficheMonde(monde);
+
+	printf("Le joueur rouge a :\n");
+	afficherListe(monde.rouge);
+
+	printf("Le joueur bleu a :\n");
+	afficherListe(monde.bleu);
+
+	enleverUnite(liste, &monde);
+
+	afficheMonde(monde);
+
+	printf("Le joueur bleu a :\n");
+	afficherListe(monde.bleu);
 
 	return 0;
 }

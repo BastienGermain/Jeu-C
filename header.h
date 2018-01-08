@@ -1,10 +1,15 @@
-#ifndef UNITE_H
-#define UNITE_H
+#ifndef HEADER_H
+#define HEADER_H
 
+/* dimension du monde en nombre de cases */
 #define LONG 12
 #define LARG 18
-#define ROUGE 'R'
-#define BLEU 'B'
+/* l'origine est en haut à gauche */
+
+#define ROUGE 'R' /* identifiant du premier joueur */ 
+#define BLEU 'B' /* identifiant du deuxieme joueur */
+
+/* les types d'unités */
 #define SERF 's'
 #define GUERRIER 'g'
 
@@ -21,10 +26,19 @@ typedef struct Monde {
 	UListe rouge, bleu; /*Listes des deux joueurs*/
 } Monde; 
 
+
+/* monde.c */
 void initialiserMonde(Monde *monde);
 int afficheMonde(Monde monde);
 
+/* unite.c */
 int creerUnite(char type, UListe *ULst);
 int placerAuMonde(Unite *unite, Monde *monde, int posX, int posY, char couleur);
+void afficherListe(UListe lst);
+
+/* action.c */
+void deplacerUnite(Unite *unite, Monde *monde, int destX, int destY);
+void enleverUnite(Unite *unite, Monde *monde);
+void supprimerElementListe(Unite *aSupprime, UListe *liste);
 
 #endif
