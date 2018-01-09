@@ -33,13 +33,17 @@ void enleverUnite(Unite *unite, Monde *monde) {
 
 	/* On met à jour les listes d'unités des joueurs */
 	if (unite->couleur == ROUGE){
-		supprimerElementListe(unite, &monde->rouge);
+		supprimerUniteListe(unite, &monde->rouge);
 	} else {
-		supprimerElementListe(unite, &monde->bleu);
+		supprimerUniteListe(unite, &monde->bleu);
 	}
+
+	/* Libère la mémoire */
+	free(unite);
 }
 
-void supprimerElementListe(Unite *aSupprime, UListe *liste) {
+/* Fonction auxiliaire permettant de supprimer une unité d'une liste */
+void supprimerUniteListe(Unite *aSupprime, UListe *liste) {
 
 	/* Si l'unite à supprimer est en début de liste */
 	if (aSupprime == *liste){			
@@ -67,5 +71,30 @@ void supprimerElementListe(Unite *aSupprime, UListe *liste) {
 
 		/* On remet la bonne valeur d'entrée pour la liste */
 		*liste = conserve;
+	}
+}
+
+int attaquer(Unite *unite, Monde *monde, int destX, int destY) {
+
+	/* Si l'unité attaquant est un guerrier, elle gagne tout le temps */
+
+	if (unite->type == GUERRIER){
+		/* On supprime l'unité attaqué */
+		enleverUnite(monde->plateau[destX][destY], monde);	
+
+		return 1;	
+	} else {
+
+		if (monde->plateau[destX][destY]->type == GUERRIER){
+			/* L'unité attaquante est un serf, elle perd face à un guerrier */
+			enleverUnite(unite, monde);
+
+			return 0;
+		} else {
+			/* Les deux unités sont des serfs, on élimine l'unité attaqué */
+			enleverUnite(monde->plateau[destX][destY], monde);
+
+			return 1;
+		}
 	}
 }

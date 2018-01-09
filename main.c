@@ -59,7 +59,31 @@ int main()
 
 	afficheMonde(monde);
 
-	deplacerUnite(liste, &monde, 2, 0);
+	/* Test deplacement */
+	/*deplacerUnite(liste, &monde, 2, 0);
+
+	afficheMonde(monde);*/
+
+	printf("Le joueur rouge a :\n");
+	afficherListe(monde.rouge);
+
+	printf("Le joueur bleu a :\n");
+	afficherListe(monde.bleu);
+
+	/* Test attaque */
+	if (attaquer(monde.bleu, &monde, 0, 2) == 1) {
+		printf("victoire\n");
+	} else {
+		printf("defaite\n");
+	}
+
+	afficheMonde(monde);
+
+	if (attaquer(monde.bleu, &monde, 0, 1) == 1) {
+		printf("victoire\n");
+	} else {
+		printf("defaite\n");
+	}
 
 	afficheMonde(monde);
 
@@ -68,18 +92,6 @@ int main()
 
 	printf("Le joueur bleu a :\n");
 	afficherListe(monde.bleu);
-
-	enleverUnite(monde.bleu->suiv->suiv, &monde);
-
-	printf("Le joueur bleu a :\n");
-	afficherListe(monde.bleu);
-
-	enleverUnite(monde.bleu, &monde);
-
-	printf("Le joueur bleu a :\n");
-	afficherListe(monde.bleu);
-
-	afficheMonde(monde);
 
 	return 0;
 }

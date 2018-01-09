@@ -3,7 +3,7 @@
 #include "header.h"
 
 int creerUnite(char type, UListe *liste) {
-	/* ULst est un pointeur sur pointeur (UListe) */
+	/* liste est un pointeur sur pointeur (UListe) */
 
 	Unite *new = malloc(sizeof(Unite));
 

@@ -39,6 +39,7 @@ void afficherListe(UListe lst);
 /* action.c */
 void deplacerUnite(Unite *unite, Monde *monde, int destX, int destY);
 void enleverUnite(Unite *unite, Monde *monde);
-void supprimerElementListe(Unite *aSupprime, UListe *liste);
+void supprimerUniteListe(Unite *aSupprime, UListe *liste);
+int attaquer(Unite *unite, Monde *monde, int destX, int destY);
 
 #endif
