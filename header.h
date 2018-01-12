@@ -41,5 +41,8 @@ void deplacerUnite(Unite *unite, Monde *monde, int destX, int destY);
 void enleverUnite(Unite *unite, Monde *monde);
 void supprimerUniteListe(Unite *aSupprime, UListe *liste);
 int attaquer(Unite *unite, Monde *monde, int destX, int destY);
+int deplacerOuAttaquer(Unite *unite, Monde *monde, int destX, int destY);
+int estVoisine(int posX, int posY, int destX, int destY);
+char quelProprietaire(Unite *unite, Monde monde);
 
 #endif

@@ -98,3 +98,76 @@ int attaquer(Unite *unite, Monde *monde, int cibleX, int cibleY) {
 		}
 	}
 }
+
+int deplacerOuAttaquer(Unite *unite, Monde *monde, int destX, int destY) {
+	/* Si la case ciblée est hors du plateau */
+	if (destX < 0 || destX > 18 || destY < 0 || destX > 12){
+		return -1;
+	}
+	
+	/* On cherche la case actuelle de l'unité */
+	int i, j;
+	for (i = 0; i < LONG; i++){
+		for (j = 0; j < LARG; j++) {
+			
+			if (monde->plateau[i][j] == unite){
+				/* Si la case n'est pas voisine */
+				if (estVoisine(i, j, destX, destY) == 0){
+					return -2;
+				}
+			}
+		}
+	}
+
+	/* On regarde si la case ciblée est déjà occupée */
+	if (monde->plateau[destX][destY] != NULL){
+		/* Si l'unité ciblée est alliée */
+		if (quelProprietaire(unite, *monde) == quelProprietaire(monde->plateau[destX][destY], *monde)){
+			return -3;
+		} else {
+			if (attaquer(unite, monde, destX, destY) == 1){
+				return 2; /* Victoire */
+			} else {
+				return 3; /* Défaite */
+			}			
+		}
+
+	} else {
+		/* Si la case n'est pas occupée, on se déplace */
+		deplacerUnite(unite, monde, destX, destY);
+
+		return 1;
+	}
+}
+
+int estVoisine(int posX, int posY, int destX, int destY) {
+	int diffX = posX - destX;
+	int diffY= posY - destY;
+
+	/* Test si la case ciblée est la même que la case de l'unité */
+	if (diffX != 0 || diffY != 0) {
+		/* Test si la case ciblée n'est pas une des 8 cases autour de l'unité */
+		if (diffX > 1 || diffX < -1 || diffY > 1 || diffY < -1){
+			return 0;
+		} else {
+			return 1;
+		}
+	} else {
+		return 0;
+	}	
+}
+
+char quelProprietaire(Unite *unite, Monde monde) {
+
+    while (monde.rouge != NULL)
+    {
+        if (monde.rouge == unite) {
+        	return ROUGE;
+        } else {
+        	monde.rouge = monde.rouge->suiv;
+        }
+        
+    }
+
+    return BLEU;
+}

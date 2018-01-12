@@ -57,32 +57,29 @@ int main()
 		}
 	}
 
-	afficheMonde(monde);
-
-	/* Test deplacement */
-	/*deplacerUnite(liste, &monde, 2, 0);
-
-	afficheMonde(monde);*/
+	/*afficheMonde(monde);
 
 	printf("Le joueur rouge a :\n");
 	afficherListe(monde.rouge);
 
 	printf("Le joueur bleu a :\n");
-	afficherListe(monde.bleu);
+	afficherListe(monde.bleu);*/
 
-	/* Test attaque */
-	if (attaquer(monde.bleu, &monde, 0, 2) == 1) {
-		printf("victoire\n");
-	} else {
-		printf("defaite\n");
-	}
+	/* Test deplacerOuAttaque */
+	int code = deplacerOuAttaquer(monde.plateau[0][0], &monde, 1, 0);
 
-	afficheMonde(monde);
-
-	if (attaquer(monde.bleu, &monde, 0, 1) == 1) {
-		printf("victoire\n");
-	} else {
-		printf("defaite\n");
+	if (code == 1) {
+		printf("Deplacement\n");
+	} else if (code == 2){
+		printf("Victoire\n");
+	} else if (code == 3){
+		printf("Defaite\n");
+	} else if (code == -1){
+		printf("Hors plateau\n");
+	} else if (code == -2){
+		printf("Case non voisine\n");
+	} else if (code == -3){
+		printf("Unite cible est alliee\n");
 	}
 
 	afficheMonde(monde);
