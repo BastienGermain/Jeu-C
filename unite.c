@@ -7,11 +7,11 @@ int creerUnite(char type, UListe *liste) {
 
 	Unite *new = malloc(sizeof(Unite));
 
-	if (new == NULL){
+	if (new == NULL){ /* Si malloc échoue */
 		return 0;
 	} else {
 		new->type = type;
-		new->suiv = *liste; /* La nouvelle unité aura un pointeur vers l'actuelle entrée de liste */
+		new->suiv = *liste; /* La nouvelle unité aura un pointeur vers l'actuelle entrée de liste (càd unité déjà existante) */
 		*liste = new; /* On fait pointer l'entrée de liste sur la nouvelle unité */
 		return 1;
 	}
@@ -28,7 +28,7 @@ int placerAuMonde(Unite *unite, Monde *monde, int posX, int posY, char couleur) 
 
 		/* On met à jour les listes d'unités des joueurs */
 		if (couleur == ROUGE){
-			unite->suiv = monde->rouge;
+			unite->suiv = monde->rouge; /* monde->rouge ==> UListe */
 			monde->rouge = unite;
 		} else {
 			unite->suiv = monde->bleu;

@@ -16,7 +16,7 @@
 typedef struct Unite{
 	int posX, posY;
 	char couleur; 
-	char type; 
+	char type;
 	struct Unite *suiv; 
 } Unite, *UListe;
 

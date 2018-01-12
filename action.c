@@ -61,7 +61,7 @@ void supprimerUniteListe(Unite *aSupprime, UListe *liste) {
 		/* On conserve la valeur d'entrée de la liste */
 		UListe conserve = *liste;
 
-		/* Sinon on boucle jusqu'à arriver à l'unité qui précède celle à supprimer */
+		/* On boucle jusqu'à arriver à l'unité qui précède celle à supprimer */
 		while (aSupprime != (*liste)->suiv) {
 			*liste = (*liste)->suiv; /* !!! ici l'entrée de la liste est modifiée !!! */
 		}
@@ -74,25 +74,25 @@ void supprimerUniteListe(Unite *aSupprime, UListe *liste) {
 	}
 }
 
-int attaquer(Unite *unite, Monde *monde, int destX, int destY) {
+int attaquer(Unite *unite, Monde *monde, int cibleX, int cibleY) {
 
 	/* Si l'unité attaquant est un guerrier, elle gagne tout le temps */
 
 	if (unite->type == GUERRIER){
-		/* On supprime l'unité attaqué */
-		enleverUnite(monde->plateau[destX][destY], monde);	
+		/* On supprime l'unité attaquée */
+		enleverUnite(monde->plateau[cibleX][cibleY], monde);	
 
 		return 1;	
 	} else {
 
-		if (monde->plateau[destX][destY]->type == GUERRIER){
+		if (monde->plateau[cibleX][cibleY]->type == GUERRIER){
 			/* L'unité attaquante est un serf, elle perd face à un guerrier */
 			enleverUnite(unite, monde);
 
 			return 0;
 		} else {
-			/* Les deux unités sont des serfs, on élimine l'unité attaqué */
-			enleverUnite(monde->plateau[destX][destY], monde);
+			/* Les deux unités sont des serfs, on élimine l'unité attaquée */
+			enleverUnite(monde->plateau[cibleX][cibleY], monde);
 
 			return 1;
 		}
