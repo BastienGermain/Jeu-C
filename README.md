@@ -1,5 +1,7 @@
 # Jeu-C
 
-Projet de jeu codé en C en première année de l'IMAC
+Projet de jeu codé en C en première année de l'IMAC.
 
-Avec Clémentine Meriadec  
+Avec Clémentine Meriadec.
+
+©2018
