@@ -34,7 +34,8 @@ int afficheMonde(Monde monde);
 /* unite.c */
 int creerUnite(char type, UListe *ULst);
 int placerAuMonde(Unite *unite, Monde *monde, int posX, int posY, char couleur);
-void afficherListe(UListe lst);
+void afficherListe(UListe liste);
+void afficherInfosUnite(Unite unite);
 
 /* action.c */
 void deplacerUnite(Unite *unite, Monde *monde, int destX, int destY);
@@ -44,5 +45,9 @@ int attaquer(Unite *unite, Monde *monde, int destX, int destY);
 int deplacerOuAttaquer(Unite *unite, Monde *monde, int destX, int destY);
 int estVoisine(int posX, int posY, int destX, int destY);
 char quelProprietaire(Unite *unite, Monde monde);
+
+/* partie.c */
+void gererDemiTour(char joueur, Monde *monde);
+void deroulementDemiTour(UListe listeJoueur, Monde *monde);
 
 #endif

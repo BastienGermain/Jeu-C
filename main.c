@@ -57,14 +57,6 @@ int main()
 		}
 	}
 
-	/*afficheMonde(monde);
-
-	printf("Le joueur rouge a :\n");
-	afficherListe(monde.rouge);
-
-	printf("Le joueur bleu a :\n");
-	afficherListe(monde.bleu);*/
-
 	/* Test deplacerOuAttaque */
 	int code = deplacerOuAttaquer(monde.plateau[0][0], &monde, 1, 0);
 

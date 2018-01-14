@@ -25,6 +25,8 @@ int placerAuMonde(Unite *unite, Monde *monde, int posX, int posY, char couleur) 
 		monde->plateau[posX][posY] = unite;
 
 		unite->couleur = couleur;
+		unite->posX = posX;
+		unite->posY = posY;
 
 		/* On met à jour les listes d'unités des joueurs */
 		if (couleur == ROUGE){
@@ -43,15 +45,18 @@ int placerAuMonde(Unite *unite, Monde *monde, int posX, int posY, char couleur) 
 
 }
 
-
-/* Fonction non demandée mais pratique pour tester */
 void afficherListe(UListe liste) {
 
 	Unite *actuel = liste;
 
     while (actuel != NULL)
     {
-        printf("%c\n", actuel->type);
+        afficherInfosUnite(*actuel);
         actuel = actuel->suiv;
     }
+}
+
+void afficherInfosUnite(Unite unite) {
+	printf("Type : %c\n", unite.type);
+    printf("Position : %d , %d\n", unite.posX, unite.posY);
 }

@@ -16,6 +16,10 @@ void deplacerUnite(Unite *unite, Monde *monde, int destX, int destY) {
 	}
 	/* On inscrit l'unité dans sa nouvelle case */
 	monde->plateau[destX][destY] = unite;
+
+	/* On met à jour les infos de l'unité */
+	unite->posX = destX;
+	unite->posY = destY;
 }
 
 void enleverUnite(Unite *unite, Monde *monde) {
