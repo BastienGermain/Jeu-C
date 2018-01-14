@@ -49,5 +49,6 @@ char quelProprietaire(Unite *unite, Monde monde);
 /* partie.c */
 void gererDemiTour(char joueur, Monde *monde);
 void deroulementDemiTour(UListe listeJoueur, Monde *monde);
+void gererTour(Monde *monde);
 
 #endif

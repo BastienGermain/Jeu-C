@@ -12,16 +12,15 @@ void gererDemiTour(char joueur, Monde *monde) {
 
 void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
 
-	/* parcourt les unités */
-
 	Unite *actuel = listeJoueur;
 
+	/* parcourt les unités */
 	while (actuel != NULL)
     {
         afficheMonde(*monde);
         afficherInfosUnite(*actuel);
 
-        /* demande au joueur */
+        /* demande au joueur une case à cibler */
         int caseX, caseY, code;
 
 		printf("Entrez les coordonnees de la case cible :\n");
@@ -32,6 +31,7 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
 			code = deplacerOuAttaquer(actuel, monde, caseX, caseY);
 		}
 
+		/* envoie le résultat de l'action au joueur */
 		if (code < 0) {
 			printf("Vous ne pouvez pas cibler cette case\n");
 		} else if (code == 1) {
@@ -47,10 +47,17 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
 
     afficheMonde(*monde);
 
-    char fin;
-
-    while(fin != 'f') {
+    /* demande confirmation à l'utilisateur pour terminer son tour */
+    char fin = ' ';
+    while (fin != 'f') {
     	printf("Entrez 'f' pour terminer votre tour\n");
-    	scanf("%c", &fin);
+    	scanf(" %c", &fin);
     }
+}
+
+void gererTour(Monde *monde) {
+	printf("Tour : %d\n", monde->tour);
+	gererDemiTour(ROUGE, monde);
+	gererDemiTour(BLEU, monde);
+	monde->tour += 1;
 }

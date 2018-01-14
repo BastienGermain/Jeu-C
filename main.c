@@ -63,7 +63,8 @@ int main()
 	printf("Le joueur bleu a :\n");
 	afficherListe(monde.bleu);*/
 
-	gererDemiTour(ROUGE, &monde);
+	gererTour(&monde);
+	gererTour(&monde);
 
 	return 0;
 }
