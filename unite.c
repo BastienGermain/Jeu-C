@@ -45,6 +45,7 @@ int placerAuMonde(Unite *unite, Monde *monde, int posX, int posY, char couleur) 
 
 }
 
+/* Pas nécessaire mais utile pour tester */
 void afficherListe(UListe liste) {
 
 	Unite *actuel = liste;

@@ -22,12 +22,35 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
         afficherInfosUnite(*actuel);
 
         /* demande au joueur */
-        int caseX, caseY;
-		printf("Entrez les coordonnées de la case où vous souhaitez vous déplacer :\n");
-		scanf("%d %d\n", &caseX, &caseY);
+        int caseX, caseY, code;
 
-		deplacerOuAttaquer(actuel, monde, caseX, caseY);
+		printf("Entrez les coordonnees de la case cible :\n");
+
+		if (scanf("%d %d", &caseX, &caseY) == 0) {
+			printf("Erreur de saisie\n");
+		} else {
+			code = deplacerOuAttaquer(actuel, monde, caseX, caseY);
+		}
+
+		if (code < 0) {
+			printf("Vous ne pouvez pas cibler cette case\n");
+		} else if (code == 1) {
+			printf("Deplacement\n");
+		} else if (code == 2){
+			printf("Victoire\n");
+		} else if (code == 3){
+			printf("Defaite\n");
+		}	
 
         actuel = actuel->suiv;
+    }
+
+    afficheMonde(*monde);
+
+    char fin;
+
+    while(fin != 'f') {
+    	printf("Entrez 'f' pour terminer votre tour\n");
+    	scanf("%c", &fin);
     }
 }

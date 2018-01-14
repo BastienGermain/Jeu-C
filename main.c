@@ -57,30 +57,13 @@ int main()
 		}
 	}
 
-	/* Test deplacerOuAttaque */
-	int code = deplacerOuAttaquer(monde.plateau[0][0], &monde, 1, 0);
-
-	if (code == 1) {
-		printf("Deplacement\n");
-	} else if (code == 2){
-		printf("Victoire\n");
-	} else if (code == 3){
-		printf("Defaite\n");
-	} else if (code == -1){
-		printf("Hors plateau\n");
-	} else if (code == -2){
-		printf("Case non voisine\n");
-	} else if (code == -3){
-		printf("Unite cible est alliee\n");
-	}
-
-	afficheMonde(monde);
-
-	printf("Le joueur rouge a :\n");
+	/*printf("Le joueur rouge a :\n");
 	afficherListe(monde.rouge);
 
 	printf("Le joueur bleu a :\n");
-	afficherListe(monde.bleu);
+	afficherListe(monde.bleu);*/
+
+	gererDemiTour(ROUGE, &monde);
 
 	return 0;
 }
