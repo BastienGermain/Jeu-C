@@ -30,6 +30,7 @@ typedef struct Monde {
 /* monde.c */
 void initialiserMonde(Monde *monde);
 int afficheMonde(Monde monde);
+void viderMonde(Monde *monde);
 
 /* unite.c */
 int creerUnite(char type, UListe *ULst);
@@ -46,9 +47,15 @@ int deplacerOuAttaquer(Unite *unite, Monde *monde, int destX, int destY);
 int estVoisine(int posX, int posY, int destX, int destY);
 char quelProprietaire(Unite *unite, Monde monde);
 
-/* partie.c */
+/* tour.c */
 void gererDemiTour(char joueur, Monde *monde);
 void deroulementDemiTour(UListe listeJoueur, Monde *monde);
 void gererTour(Monde *monde);
+
+/* partie.c */
+void gererPartie(void);
+void positionneUnite(UListe *liste, char type, Monde *monde, int caseX, int caseY, char couleur);
+int testGagnant(Monde monde);
+int demandeArretPartie(void);
 
 #endif

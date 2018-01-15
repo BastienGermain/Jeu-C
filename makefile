@@ -1,5 +1,5 @@
-jeu: monde.o unite.o action.o partie.o main.o
-	gcc -o jeu monde.o unite.o action.o partie.o main.o
+jeu: monde.o unite.o action.o tour.o partie.o main.o
+	gcc -o jeu monde.o unite.o action.o tour.o partie.o main.o
 
 monde.o: monde.c header.h
 	gcc -o monde.o -c monde.c
@@ -9,6 +9,9 @@ unite.o: unite.c header.h
 
 action.o: action.c header.h
 	gcc -o action.o -c action.c
+
+tour.o: tour.c header.h
+	gcc -o tour.o -c tour.c	
 
 partie.o: partie.c header.h
 	gcc -o partie.o -c partie.c

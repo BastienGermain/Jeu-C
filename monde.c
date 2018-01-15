@@ -41,9 +41,9 @@ int afficheMonde(Monde monde) {
 
 				/* Test du type d'unité */
 				if (monde.plateau[i][j]->type == SERF){
-					printf("* "); /* * pour un SERF */
+					printf("s "); /* s pour un SERF */
 				} else {
-					printf("+ "); /* + pour un GUERRIER */
+					printf("g "); /* g pour un GUERRIER */
 				}
 			}
 
@@ -55,4 +55,25 @@ int afficheMonde(Monde monde) {
 	printf("------------------------");
 	printf("------------------------");
 	printf("-------------------------\n");
+}
+
+void viderMonde(Monde *monde) {
+
+	int i, j;
+
+	for (i = 0; i < LONG; i++){
+		for (j = 0; j < LARG; j++) {
+			if (monde->plateau[i][j] != NULL) {
+
+				/* Supprime toutes les unités restantes sur le plateau */
+				enleverUnite(monde->plateau[i][j], monde);
+				monde->plateau[i][j] = NULL;
+			}
+		}
+	}
+
+	monde->tour = 0;
+	monde->rouge = NULL;
+	monde->bleu = NULL;
+
 }

@@ -2,62 +2,82 @@
 #include <stdlib.h>
 #include "header.h"
 
-void gererDemiTour(char joueur, Monde *monde) {
-	if (joueur == ROUGE){
-		deroulementDemiTour(monde->rouge, monde);
+void gererPartie(void) {
+
+	Monde monde;
+	initialiserMonde(&monde);
+
+	UListe liste;
+
+	/* Unités rouges */
+	positionneUnite(&liste, SERF, &monde, 0, 0, ROUGE);
+	positionneUnite(&liste, GUERRIER, &monde, 0, 1, ROUGE);
+	positionneUnite(&liste, SERF, &monde, 0, 2, ROUGE);
+
+	/* Unités bleues */
+	positionneUnite(&liste, SERF, &monde, 1, 0, BLEU);
+	positionneUnite(&liste, GUERRIER, &monde, 1, 1, BLEU);
+	positionneUnite(&liste, SERF, &monde, 1, 2, BLEU);
+
+	int finDePartie = 0; // Pour tester la fin de partie sans gagnant
+
+	/* On joue tant qu'il n'y a pas de gagnant ou d'arrêt volontaire sans gagnant */
+	while (testGagnant(monde) == 0 && finDePartie == 0) {
+		gererTour(&monde);
+
+		/* Propose un arrêt de partie en fin de tour si personne n'a gagné */
+		if (testGagnant(monde) == 0) {
+			finDePartie = demandeArretPartie();
+		}
+		
+	}
+
+	/* Annonce du gagnant */
+	if (testGagnant(monde) == 1) {
+		printf("Le joueur bleu remporte la partie.\n");
+	} else if (testGagnant(monde) == 2) {
+		printf("Le joueur rouge remporte la partie.\n");
 	} else {
-		deroulementDemiTour(monde->bleu, monde);
+		printf("Pas de gagnant. Arret volontaire de la partie.\n");
+	}
+
+	viderMonde(&monde);
+}
+
+void positionneUnite(UListe *liste, char type, Monde *monde, int caseX, int caseY, char couleur) {
+
+	if(creerUnite(type, liste) == 0){
+		printf("erreur allocation memoire\n");
+	} else {
+		if (placerAuMonde(*liste, monde, caseX, caseY, couleur) == 0){
+			printf("case occupe\n");
+		}
 	}
 }
 
-void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
+int testGagnant(Monde monde) {
 
-	Unite *actuel = listeJoueur;
-
-	/* parcourt les unités */
-	while (actuel != NULL)
-    {
-        afficheMonde(*monde);
-        afficherInfosUnite(*actuel);
-
-        /* demande au joueur une case à cibler */
-        int caseX, caseY, code;
-
-		printf("Entrez les coordonnees de la case cible :\n");
-
-		if (scanf("%d %d", &caseX, &caseY) == 0) {
-			printf("Erreur de saisie\n");
-		} else {
-			code = deplacerOuAttaquer(actuel, monde, caseX, caseY);
-		}
-
-		/* envoie le résultat de l'action au joueur */
-		if (code < 0) {
-			printf("Vous ne pouvez pas cibler cette case\n");
-		} else if (code == 1) {
-			printf("Deplacement\n");
-		} else if (code == 2){
-			printf("Victoire\n");
-		} else if (code == 3){
-			printf("Defaite\n");
-		}	
-
-        actuel = actuel->suiv;
-    }
-
-    afficheMonde(*monde);
-
-    /* demande confirmation à l'utilisateur pour terminer son tour */
-    char fin = ' ';
-    while (fin != 'f') {
-    	printf("Entrez 'f' pour terminer votre tour\n");
-    	scanf(" %c", &fin);
-    }
+	if (monde.rouge == NULL) {
+		// Bleu a gagné
+		return 1;
+	} else if (monde.bleu == NULL) {
+		// Rouge a gagné
+		return 2;
+	} else {
+		// Pas de gagnant
+		return 0;
+	}
 }
 
-void gererTour(Monde *monde) {
-	printf("Tour : %d\n", monde->tour);
-	gererDemiTour(ROUGE, monde);
-	gererDemiTour(BLEU, monde);
-	monde->tour += 1;
+int demandeArretPartie(void) {
+	int reponse;
+
+	printf("Voulez-vous arreter la partie sans gagnant ? (1 = oui) (autre chiffre = non)\n");
+	scanf("%d", &reponse);
+
+	if (reponse == 1) {
+		return 1;
+	} else {
+		return 0;
+	}
 }
