@@ -31,25 +31,31 @@ int afficheMonde(Monde monde) {
 
 		for (j = 0; j < LARG; j++) {
 
-			MLV_draw_rectangle( i*10 , j*10, 10, 10, MLV_rgba(255,0,255,255) );
-
-			if (monde.plateau[i][j] == NULL){
-				//printf("|   ");
+			/* Création du damier */
+			if ((i + j) % 2 == 0){
+				MLV_draw_filled_rectangle(j*30, i*30, 30, 30, MLV_rgba(206,206,206,255));
 			} else {
+				MLV_draw_filled_rectangle(j*30, i*30, 30, 30, MLV_rgba(90,90,90,255));
+			}			
+
+			if (monde.plateau[i][j] != NULL){
+
+				MLV_Color color;
 
 				/* Test du propriétaire */
-				/*if (monde.plateau[i][j]->couleur == ROUGE){
-					printf("|R");
+				if (monde.plateau[i][j]->couleur == ROUGE){
+					color = MLV_rgba(191,63,63,255);
+					
 				} else {
-					printf("|B");
-				}*/
+					color = MLV_rgba(63,127,191,255);
+				}
 
 				/* Test du type d'unité */
-				/*if (monde.plateau[i][j]->type == SERF){
-					printf("s ");
+				if (monde.plateau[i][j]->type == SERF){
+					MLV_draw_ellipse(j*30 + 15, i*30 + 15, 7, 7, color);
 				} else {
-					printf("g ");
-				}*/
+					MLV_draw_filled_ellipse(j*30 + 15, i*30 + 15, 7, 7, color);
+				}
 			}
 
 		}
@@ -64,7 +70,7 @@ int afficheMonde(Monde monde) {
 	//
 	// Attend 10 secondes avant la fin du programme.
 	//
-	MLV_wait_seconds( 10 );
+	MLV_wait_seconds(10);
 
 	//
 	// Ferme la fenêtre
