@@ -19,45 +19,57 @@ void initialiserMonde(Monde *monde) {
 
 int afficheMonde(Monde monde) {
 
+	//
+	// Créé et affiche la fenêtre
+	//
+	MLV_create_window( "plateau", "plateau", 640, 480 );
 	
 
 	int i, j;
 
 	for (i = 0; i < LONG; i++){
 
-		printf("------------------------");
-		printf("------------------------");
-		printf("-------------------------\n");
-
 		for (j = 0; j < LARG; j++) {
 
+			MLV_draw_rectangle( i*10 , j*10, 10, 10, MLV_rgba(255,0,255,255) );
+
 			if (monde.plateau[i][j] == NULL){
-				printf("|   ");
+				//printf("|   ");
 			} else {
 
 				/* Test du propriétaire */
-				if (monde.plateau[i][j]->couleur == ROUGE){
+				/*if (monde.plateau[i][j]->couleur == ROUGE){
 					printf("|R");
 				} else {
 					printf("|B");
-				}
+				}*/
 
 				/* Test du type d'unité */
-				if (monde.plateau[i][j]->type == SERF){
-					printf("s "); /* s pour un SERF */
+				/*if (monde.plateau[i][j]->type == SERF){
+					printf("s ");
 				} else {
-					printf("g "); /* g pour un GUERRIER */
-				}
+					printf("g ");
+				}*/
 			}
 
 		}
 
-		printf("|\n");
 	}
 
-	printf("------------------------");
-	printf("------------------------");
-	printf("-------------------------\n");
+	//
+	// Met a jour l'affichage.
+	//
+	MLV_actualise_window();
+
+	//
+	// Attend 10 secondes avant la fin du programme.
+	//
+	MLV_wait_seconds( 10 );
+
+	//
+	// Ferme la fenêtre
+	//
+	MLV_free_window();
 }
 
 void viderMonde(Monde *monde) {
