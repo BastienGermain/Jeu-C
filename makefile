@@ -1,5 +1,5 @@
 jeu: monde.o unite.o action.o tour.o partie.o main.o
-	gcc -o jeu monde.o unite.o action.o tour.o partie.o main.o
+	gcc -o jeu monde.o unite.o action.o tour.o partie.o main.o -g -O2 -Wall -Werror `pkg-config --cflags MLV` `pkg-config --libs MLV`
 
 monde.o: monde.c header.h
 	gcc -o monde.o -c monde.c

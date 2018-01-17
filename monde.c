@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <MLV/MLV_all.h>
 #include "header.h"
 
 void initialiserMonde(Monde *monde) {
@@ -17,6 +18,8 @@ void initialiserMonde(Monde *monde) {
 }
 
 int afficheMonde(Monde monde) {
+
+	
 
 	int i, j;
 
