@@ -68,9 +68,9 @@ int afficheMonde(Monde monde) {
 	MLV_actualise_window();
 
 	//
-	// Attend 10 secondes avant la fin du programme.
+	// Attend 60 secondes avant la fin du programme.
 	//
-	MLV_wait_seconds(10);
+	MLV_wait_seconds(60);
 
 	//
 	// Ferme la fenêtre
