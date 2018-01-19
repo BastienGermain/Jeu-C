@@ -68,13 +68,18 @@ int afficheMonde(Monde monde) {
 
 	}
 
+	/* On affiche sur quelle case est la souris */
 	while( 1 ){
-                             
-    // On récupère puis affiche la position de la souris
 
-	MLV_draw_filled_rectangle( 540, 0, 100, 360, MLV_rgba(206,206,206,255) );
+	int x,y;
 
-        int x,y;
+        MLV_draw_text(
+            555,15,
+            "x : %d y : %d",
+            MLV_rgba(0,0,0,255),
+            x/30, y/30 
+            );
+
         MLV_get_mouse_position( &x, &y );
         MLV_draw_text(
             555,15,
@@ -85,7 +90,7 @@ int afficheMonde(Monde monde) {
                 
         // On met à jour l'affichage.
         MLV_actualise_window();
-        
+
     }
 
 
@@ -97,7 +102,7 @@ int afficheMonde(Monde monde) {
 	//
 	// Attend 60 secondes avant la fin du programme.
 	//
-	MLV_wait_seconds(60);
+	MLV_wait_seconds(10);
 
 	//
 	// Ferme la fenêtre
