@@ -6,6 +6,9 @@
 #define LARG 18
 /* l'origine est en haut à gauche */
 
+/* taille d'une case du plateau */
+#define CASE 50
+
 #define ROUGE 'R' /* identifiant du premier joueur */ 
 #define BLEU 'B' /* identifiant du deuxieme joueur */
 

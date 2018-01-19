@@ -26,11 +26,14 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
 
 		printf("Entrez les coordonnees de la case cible :\n");
 
-		if (scanf("%d %d", &caseX, &caseY) == 0) {
-			printf("Erreur de saisie\n"); /* Le joueur n'a pas saisi de chiffres --> arrêt du programme */
-		} else {
-			code = deplacerOuAttaquer(actuel, monde, caseX, caseY);
-		}
+        /* Attend que l'utilisateur clique sur le bouton gauche de la souris */
+		MLV_wait_mouse(&caseY, &caseX);
+
+		caseX /= CASE;
+		caseY /= CASE;
+		
+		code = deplacerOuAttaquer(actuel, monde, caseX, caseY);
+	
 
 		/* renvoie le résultat de l'action au joueur */
 		if (code < 0) {
@@ -57,8 +60,25 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
 }
 
 void gererTour(Monde *monde) {
-	monde->tour += 1;
-	printf("Tour : %d\n", monde->tour);
+
+	/* Efface les anciens textes */
+	MLV_draw_text(
+        19*CASE,15,
+        "Tour : %d",
+        MLV_rgba(0,0,0,255),
+        monde->tour
+    );
+
+    monde->tour += 1;
+
+	MLV_draw_text(
+        19*CASE,15,
+        "Tour : %d",
+        MLV_rgba(200,200,200,255),
+        monde->tour
+    );
+
+    MLV_actualise_window();
 
 	printf("Joueur rouge :\n");
 	gererDemiTour(ROUGE, monde);

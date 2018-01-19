@@ -19,11 +19,9 @@ void initialiserMonde(Monde *monde) {
 
 int afficheMonde(Monde monde) {
 
-	/* Créé et affiche la fenêtre */
-	MLV_create_window( "plateau", "plateau", 18*30+100, 12*30 );
 	
 	/* Créer les personnages */
-	MLV_Image *serfB, *guerrierB, *serfR, *guerrierR;
+	//MLV_Image *serfB, *guerrierB, *serfR, *guerrierR;
 	MLV_Image *serf, *guerrier;
 
 	int i, j;
@@ -34,9 +32,9 @@ int afficheMonde(Monde monde) {
 
 			/* Création du damier */
 			if ((i + j) % 2 == 0){
-				MLV_draw_filled_rectangle(j*30, i*30, 30, 30, MLV_rgba(206,206,206,255));
+				MLV_draw_filled_rectangle(j*CASE, i*CASE, CASE, CASE, MLV_rgba(206,206,206,255));
 			} else {
-				MLV_draw_filled_rectangle(j*30, i*30, 30, 30, MLV_rgba(90,90,90,255));
+				MLV_draw_filled_rectangle(j*CASE, i*CASE, CASE, CASE, MLV_rgba(90,90,90,255));
 			}			
 
 			if (monde.plateau[i][j] != NULL){
@@ -53,14 +51,14 @@ int afficheMonde(Monde monde) {
 				}
 
 				/* Redimensionner les images */
-				MLV_resize_image_with_proportions( serf, 30, 30);
-				MLV_resize_image_with_proportions( guerrier, 30, 30);	
+				MLV_resize_image_with_proportions( serf, CASE, CASE);
+				MLV_resize_image_with_proportions( guerrier, CASE, CASE);	
 
 				/* Test du type d'unité */
 				if (monde.plateau[i][j]->type == SERF){
-					MLV_draw_image( serf,j*30, i*30);
+					MLV_draw_image( serf,j*CASE, i*CASE);
 				} else {
-					MLV_draw_image( guerrier,j*30, i*30);
+					MLV_draw_image( guerrier,j*CASE, i*CASE);
 				}
 			}
 
@@ -69,7 +67,7 @@ int afficheMonde(Monde monde) {
 	}
 
 	/* On affiche sur quelle case est la souris */
-	while( 1 ){
+	while(0){
 
 	int x,y;
 
@@ -77,7 +75,7 @@ int afficheMonde(Monde monde) {
             555,15,
             "x : %d y : %d",
             MLV_rgba(0,0,0,255),
-            x/30, y/30 
+            x/CASE, y/CASE 
             );
 
         MLV_get_mouse_position( &x, &y );
@@ -85,7 +83,7 @@ int afficheMonde(Monde monde) {
             555,15,
             "x : %d y : %d",
             MLV_rgba(90,90,90,255),
-            x/30, y/30 
+            x/CASE, y/CASE 
             );
                 
         // On met à jour l'affichage.
@@ -99,15 +97,7 @@ int afficheMonde(Monde monde) {
 	//
 	MLV_actualise_window();
 
-	//
-	// Attend 60 secondes avant la fin du programme.
-	//
-	MLV_wait_seconds(10);
 
-	//
-	// Ferme la fenêtre
-	//
-	MLV_free_window();
 }
 
 void viderMonde(Monde *monde) {
