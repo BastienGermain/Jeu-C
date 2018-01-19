@@ -19,11 +19,12 @@ void initialiserMonde(Monde *monde) {
 
 int afficheMonde(Monde monde) {
 
-	//
-	// Créé et affiche la fenêtre
-	//
-	MLV_create_window( "plateau", "plateau", 640, 480 );
+	/* Créé et affiche la fenêtre */
+	MLV_create_window( "plateau", "plateau", 18*30+100, 12*30 );
 	
+	/* Créer les personnages */
+	MLV_Image *serfB, *guerrierB, *serfR, *guerrierR;
+	MLV_Image *serf, *guerrier;
 
 	int i, j;
 
@@ -42,25 +43,51 @@ int afficheMonde(Monde monde) {
 
 				MLV_Color color;
 
-				/* Test du propriétaire */
+				/* Test du propriétaire & charger les images */
 				if (monde.plateau[i][j]->couleur == ROUGE){
-					color = MLV_rgba(191,63,63,255);
-					
+					serf=MLV_load_image( "image/serf-r.png" );
+					guerrier=MLV_load_image( "image/guerrier-r.png" );					
 				} else {
-					color = MLV_rgba(63,127,191,255);
+					serf=MLV_load_image( "image/serf-b.png" );
+					guerrier=MLV_load_image( "image/guerrier-b.png" );	
 				}
+
+				/* Redimensionner les images */
+				MLV_resize_image_with_proportions( serf, 30, 30);
+				MLV_resize_image_with_proportions( guerrier, 30, 30);	
 
 				/* Test du type d'unité */
 				if (monde.plateau[i][j]->type == SERF){
-					MLV_draw_ellipse(j*30 + 15, i*30 + 15, 7, 7, color);
+					MLV_draw_image( serf,j*30, i*30);
 				} else {
-					MLV_draw_filled_ellipse(j*30 + 15, i*30 + 15, 7, 7, color);
+					MLV_draw_image( guerrier,j*30, i*30);
 				}
 			}
 
 		}
 
 	}
+
+	while( 1 ){
+                             
+    // On récupère puis affiche la position de la souris
+
+	MLV_draw_filled_rectangle( 540, 0, 100, 360, MLV_rgba(206,206,206,255) );
+
+        int x,y;
+        MLV_get_mouse_position( &x, &y );
+        MLV_draw_text(
+            555,15,
+            "x : %d y : %d",
+            MLV_rgba(90,90,90,255),
+            x/30, y/30 
+            );
+                
+        // On met à jour l'affichage.
+        MLV_actualise_window();
+        
+    }
+
 
 	//
 	// Met a jour l'affichage.
