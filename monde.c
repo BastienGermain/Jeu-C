@@ -91,7 +91,16 @@ int afficheMonde(Monde monde) {
 
     }
 
+    const char *text_box = "-> REGLE DU JEU <-\nPasser tour : f\nArrêter la partie : échap\nContinuer la partie : autre touche\n";
 
+    /* Affiche les regles du jeu */
+    MLV_draw_adapted_text_box(
+                19*CASE, CASE,
+                text_box,
+                9,
+                MLV_rgba(255,255,255,0), MLV_rgba(255,255,255,255), MLV_rgba(255,255,255,0),
+                MLV_TEXT_CENTER
+     );
 	//
 	// Met a jour l'affichage.
 	//

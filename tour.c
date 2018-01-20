@@ -24,7 +24,7 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
 
         /* demande au joueur une case à cibler */
         int caseX, caseY, code;
-
+	            	
 		printf("Entrez les coordonnees de la case cible :\n");
 
         /* Attend que l'utilisateur clique sur le bouton gauche de la souris */
@@ -53,11 +53,16 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
     afficheMonde(*monde);
 
     /* demande confirmation à l'utilisateur pour terminer son tour */
+    MLV_Keyboard_button touche;
+    		
     char fin = ' ';
     while (fin != 'f') {
     	printf("Entrez 'f' pour terminer votre tour\n");
-    	scanf(" %c", &fin);
+		MLV_wait_keyboard( &touche, NULL, NULL );
+			if( touche == MLV_KEYBOARD_f )
+			fin='f';
     }
+
 }
 
 void gererTour(Monde *monde) {

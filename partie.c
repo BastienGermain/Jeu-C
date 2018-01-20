@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "header.h"
+#include <MLV/MLV_all.h>
 
 void gererPartie(void) {
 
@@ -70,12 +71,14 @@ int testGagnant(Monde monde) {
 }
 
 int demandeArretPartie(void) {
-	int reponse;
 
-	printf("Voulez-vous arreter la partie sans gagnant ? (1 = oui) (autre chiffre = non)\n");
-	scanf("%d", &reponse);
+	MLV_Keyboard_button touche;
 
-	if (reponse == 1) {
+	printf("Voulez-vous arreter la partie sans gagnant ? (ECHAP = oui) (autre touche = non)\n");
+
+	MLV_wait_keyboard( &touche, NULL, NULL );
+
+	if (touche == MLV_KEYBOARD_ESCAPE) {
 		return 1;
 	} else {
 		return 0;
