@@ -72,7 +72,7 @@ int testGagnant(Monde monde) {
 
 int demandeArretPartie(void) {
 
-	effaceText(100);
+	effaceText(60);
 
 	printf("Voulez-vous arreter la partie sans gagnant ?\n");
 
