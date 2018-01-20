@@ -60,6 +60,27 @@ void afficherListe(UListe liste) {
 void afficherInfosUnite(Unite unite) {
 
 	effaceText(60);
-	printf("Type : %c\n", unite.type);
-    printf("Position : %d , %d\n", unite.posX, unite.posY);
+
+	MLV_draw_text(
+        19*CASE, 75,
+        "Unité sélectionnée :",
+        MLV_rgba(255,255,255,255)
+    );
+
+    MLV_draw_text(
+        19*CASE, 105,
+        "Type : %c",
+        MLV_rgba(255,255,255,255),
+        unite.type
+    );
+
+    MLV_draw_text(
+        19*CASE, 135,
+        "Position : %d, %d",
+        MLV_rgba(255,255,255,255),
+        unite.posX, unite.posY
+
+    );
+
+    MLV_actualise_window();
 }

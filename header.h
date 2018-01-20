@@ -34,7 +34,6 @@ typedef struct Monde {
 void initialiserMonde(Monde *monde);
 int afficheMonde(Monde monde);
 void viderMonde(Monde *monde);
-void effaceText(int hauteurDepart);
 
 /* unite.c */
 int creerUnite(char type, UListe *ULst);
@@ -55,13 +54,16 @@ char quelProprietaire(Unite *unite, Monde monde);
 void gererDemiTour(char joueur, Monde *monde);
 void deroulementDemiTour(UListe listeJoueur, Monde *monde);
 void gererTour(Monde *monde);
-void creerButton(char message[], int posX, int posY, int *width_text, int *height_text);
-int clickButton(int clickX, int clickY, int posX, int posY, int width_box, int height_box);
 
 /* partie.c */
 void gererPartie(void);
 void positionneUnite(UListe *liste, char type, Monde *monde, int caseX, int caseY, char couleur);
 int testGagnant(Monde monde);
 int demandeArretPartie(void);
+
+/* mlv.c */
+void effaceText(int hauteurDepart);
+void creerButton(char message[], int posX, int posY, int *width_text, int *height_text);
+int clickButton(int clickX, int clickY, int posX, int posY, int width_box, int height_box);
 
 #endif

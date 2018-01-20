@@ -19,8 +19,6 @@ void initialiserMonde(Monde *monde) {
 
 int afficheMonde(Monde monde) {
 
-	
-	/* Créer les personnages */
 	MLV_Image *serf, *guerrier;
 
 	int i, j;
@@ -29,18 +27,16 @@ int afficheMonde(Monde monde) {
 
 		for (j = 0; j < LARG; j++) {
 
-
-
 			/* Création du damier */
 			if ((i + j) % 2 == 0){
-				MLV_draw_filled_rectangle(j*CASE, i*CASE, CASE, CASE, MLV_rgba(206,206,206,255));
+				MLV_draw_filled_rectangle(j*CASE, i*CASE, CASE, CASE, MLV_rgba(200,200,200,255));
 			} else {
 				MLV_draw_filled_rectangle(j*CASE, i*CASE, CASE, CASE, MLV_rgba(90,90,90,255));
 			}
 
 			if (monde.plateau[i][j] != NULL){
 
-				/* Test du propriétaire & charger les images */
+				/* Test du propriétaire & chargement des images */
 				if (monde.plateau[i][j]->couleur == ROUGE){
 					serf = MLV_load_image( "image/serf-r.png" );
 					guerrier = MLV_load_image( "image/guerrier-r.png" );					
@@ -49,7 +45,7 @@ int afficheMonde(Monde monde) {
 					guerrier = MLV_load_image( "image/guerrier-b.png" );
 				}
 
-				/* Redimensionner les images */
+				/* Redimensionne les images */
 				MLV_resize_image_with_proportions(serf, CASE, CASE);
 				MLV_resize_image_with_proportions(guerrier, CASE, CASE);	
 
@@ -65,20 +61,7 @@ int afficheMonde(Monde monde) {
 
 	}
 
-
-    const char *text_box = "-> REGLE DU JEU <-\nPasser tour : f\nArrêter la partie : échap\nContinuer la partie : autre touche\n";
-
-    /* Affiche les regles du jeu */
-    /*MLV_draw_adapted_text_box(
-                19*CASE, CASE,
-                text_box,
-                9,
-                MLV_rgba(255,255,255,0), MLV_rgba(255,255,255,255), MLV_rgba(255,255,255,0),
-                MLV_TEXT_CENTER
-     );*/
-	//
-	// Met a jour l'affichage.
-	//
+	// Met a jour l'affichage
 	MLV_actualise_window();
 
 
@@ -103,12 +86,4 @@ void viderMonde(Monde *monde) {
 	monde->rouge = NULL;
 	monde->bleu = NULL;
 
-}
-
-
-/* Efface le texte dans la partie noire à partir de la hauteur en paramètre */
-void effaceText(int hauteurDepart) {
-	MLV_draw_filled_rectangle(18*CASE, hauteurDepart, 7*CASE, 12*CASE - hauteurDepart, MLV_rgba(0,0,0,255));
-
-	MLV_actualise_window();
 }

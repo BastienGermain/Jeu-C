@@ -6,7 +6,7 @@
 int main()
 {
 	/* Créé et affiche la fenêtre */
-	MLV_create_window( "plateau", "plateau", 25*CASE, 12*CASE );
+	MLV_create_window( "plateau", "plateau", 27*CASE, 12*CASE );
 
 	gererPartie();
 

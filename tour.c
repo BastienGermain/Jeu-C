@@ -25,8 +25,14 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
 
         /* demande au joueur une case à cibler */
         int caseX, caseY, code;
-	            	
-		printf("Entrez les coordonnees de la case cible :\n");
+
+        MLV_draw_text(
+	        19*CASE,165,
+	        "Clickez sur une case pour attaquer ou vous déplacer",
+	        MLV_rgba(255,255,255,255)
+	    );
+
+	    MLV_actualise_window();
 
         /* Attend que l'utilisateur clique sur le bouton gauche de la souris */
 		MLV_wait_mouse(&caseY, &caseX);
@@ -77,14 +83,14 @@ void gererTour(Monde *monde) {
 	MLV_draw_text(
         19*CASE,15,
         "Tour : %d",
-        MLV_rgba(200,200,200,255),
+        MLV_rgba(255,255,255,255),
         monde->tour
     );
 
 	MLV_draw_text(
         19*CASE,45,
         "Joueur Rouge",
-        MLV_rgba(200,200,200,255)
+        MLV_rgba(255,255,255,255)
     );
 	gererDemiTour(ROUGE, monde);
 
@@ -93,36 +99,7 @@ void gererTour(Monde *monde) {
 	MLV_draw_text(
         19*CASE,45,
         "Joueur Bleu",
-        MLV_rgba(200,200,200,255)
+        MLV_rgba(255,255,255,255)
     );
 	gererDemiTour(BLEU, monde);	
-}
-
-void creerButton(char message[], int posX, int posY, int *width_box, int *height_box) {
-
-	MLV_get_size_of_adapted_text_box(
-		message,
-		CASE/3,
-		width_box, height_box
-	);
-
-    MLV_draw_adapted_text_box(
-        posX, posY,
-        message,
-        CASE / 3,
-        MLV_rgba(255,255,255,255), MLV_rgba(255,255,255,255), MLV_rgba(255,255,255,0),
-        MLV_TEXT_CENTER
-    );
-
-    MLV_actualise_window();;
-}
-
-int clickButton(int clickX, int clickY, int posX, int posY, int width_box, int height_box) {
-
-    if (clickX < posX || clickX > posX + width_box || clickY < posY || clickY > posY + height_box) {
-    	// Le click n'est pas sur le bouton
-    	return 0;
-    } else {
-    	return 1;
-    }
 }
