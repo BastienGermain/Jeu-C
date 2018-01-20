@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "header.h"
+#include <MLV/MLV_all.h>
 
 void gererDemiTour(char joueur, Monde *monde) {
 	if (joueur == ROUGE){
