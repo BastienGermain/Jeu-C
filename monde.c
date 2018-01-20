@@ -29,12 +29,14 @@ int afficheMonde(Monde monde) {
 
 		for (j = 0; j < LARG; j++) {
 
+
+
 			/* Création du damier */
 			if ((i + j) % 2 == 0){
 				MLV_draw_filled_rectangle(j*CASE, i*CASE, CASE, CASE, MLV_rgba(206,206,206,255));
 			} else {
 				MLV_draw_filled_rectangle(j*CASE, i*CASE, CASE, CASE, MLV_rgba(90,90,90,255));
-			}			
+			}
 
 			if (monde.plateau[i][j] != NULL){
 
@@ -67,13 +69,13 @@ int afficheMonde(Monde monde) {
     const char *text_box = "-> REGLE DU JEU <-\nPasser tour : f\nArrêter la partie : échap\nContinuer la partie : autre touche\n";
 
     /* Affiche les regles du jeu */
-    MLV_draw_adapted_text_box(
+    /*MLV_draw_adapted_text_box(
                 19*CASE, CASE,
                 text_box,
                 9,
                 MLV_rgba(255,255,255,0), MLV_rgba(255,255,255,255), MLV_rgba(255,255,255,0),
                 MLV_TEXT_CENTER
-     );
+     );*/
 	//
 	// Met a jour l'affichage.
 	//
@@ -103,6 +105,8 @@ void viderMonde(Monde *monde) {
 
 }
 
+
+/* Efface le texte dans la partie noire à partir de la hauteur en paramètre */
 void effaceText(int hauteurDepart) {
 	MLV_draw_filled_rectangle(18*CASE, hauteurDepart, 7*CASE, 12*CASE - hauteurDepart, MLV_rgba(0,0,0,255));
 

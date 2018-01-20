@@ -72,15 +72,29 @@ int testGagnant(Monde monde) {
 
 int demandeArretPartie(void) {
 
-	MLV_Keyboard_button touche;
+	effaceText(100);
 
-	printf("Voulez-vous arreter la partie sans gagnant ? (ECHAP = oui) (autre touche = non)\n");
+	printf("Voulez-vous arreter la partie sans gagnant ?\n");
 
-	MLV_wait_keyboard( &touche, NULL, NULL );
+	int width_box_oui, height_box_oui, width_box_non, height_box_non;
 
-	if (touche == MLV_KEYBOARD_ESCAPE) {
-		return 1;
-	} else {
+	creerButton("Oui", 19*CASE, 8*CASE, &width_box_oui, &height_box_oui);
+	creerButton("Non", 19*CASE, 10*CASE, &width_box_non, &height_box_non);
+
+    int reponseClickOui, reponseClickNon;
+    while (reponseClickOui != 1 && reponseClickNon != 1){
+    	int clickX, clickY;
+		MLV_wait_mouse(&clickX, &clickY);
+
+    	reponseClickOui = clickButton(clickX, clickY, 19*CASE, 8*CASE, width_box_oui, height_box_oui);
+    	reponseClickNon = clickButton(clickX, clickY, 19*CASE, 10*CASE, width_box_non, height_box_non);
+    }
+
+    if (reponseClickOui == 1) {
+    	// Arrête de la partie
+    	return 1;
+    } else {
 		return 0;
 	}
+
 }

@@ -55,6 +55,8 @@ char quelProprietaire(Unite *unite, Monde monde);
 void gererDemiTour(char joueur, Monde *monde);
 void deroulementDemiTour(UListe listeJoueur, Monde *monde);
 void gererTour(Monde *monde);
+void creerButton(char message[], int posX, int posY, int *width_text, int *height_text);
+int clickButton(int clickX, int clickY, int posX, int posY, int width_box, int height_box);
 
 /* partie.c */
 void gererPartie(void);

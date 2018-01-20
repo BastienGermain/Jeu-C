@@ -58,6 +58,8 @@ void afficherListe(UListe liste) {
 }
 
 void afficherInfosUnite(Unite unite) {
+
+	effaceText(60);
 	printf("Type : %c\n", unite.type);
     printf("Position : %d , %d\n", unite.posX, unite.posY);
 }

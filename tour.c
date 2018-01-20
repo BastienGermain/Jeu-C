@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "header.h"
 #include <MLV/MLV_all.h>
 
@@ -52,15 +53,17 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
 
     afficheMonde(*monde);
 
-    /* demande confirmation à l'utilisateur pour terminer son tour */
-    MLV_Keyboard_button touche;
-    		
-    char fin = ' ';
-    while (fin != 'f') {
-    	printf("Entrez 'f' pour terminer votre tour\n");
-		MLV_wait_keyboard( &touche, NULL, NULL );
-			if( touche == MLV_KEYBOARD_f )
-			fin='f';
+    int width_box, height_box; /* Size of the text_box */
+
+    creerButton("Fin du tour", 19*CASE, 10*CASE, &width_box, &height_box);
+
+    int reponseClick;
+    while (reponseClick != 1){
+
+    	int clickX, clickY;
+		MLV_wait_mouse(&clickX, &clickY);
+
+    	reponseClick = clickButton(clickX, clickY, 19*CASE, 10*CASE, width_box, height_box);
     }
 
 }
@@ -78,21 +81,48 @@ void gererTour(Monde *monde) {
         monde->tour
     );
 
-    MLV_actualise_window();
-
 	MLV_draw_text(
-        19*CASE,40,
+        19*CASE,45,
         "Joueur Rouge",
         MLV_rgba(200,200,200,255)
     );
 	gererDemiTour(ROUGE, monde);
 
-	effaceText(40);
+	effaceText(45);
 
 	MLV_draw_text(
-        19*CASE,40,
+        19*CASE,45,
         "Joueur Bleu",
         MLV_rgba(200,200,200,255)
     );
 	gererDemiTour(BLEU, monde);	
+}
+
+void creerButton(char message[], int posX, int posY, int *width_box, int *height_box) {
+
+	MLV_get_size_of_adapted_text_box(
+		message,
+		CASE/3,
+		width_box, height_box
+	);
+
+    MLV_draw_adapted_text_box(
+        posX, posY,
+        message,
+        CASE / 3,
+        MLV_rgba(255,255,255,255), MLV_rgba(255,255,255,255), MLV_rgba(255,255,255,0),
+        MLV_TEXT_CENTER
+    );
+
+    MLV_actualise_window();;
+}
+
+int clickButton(int clickX, int clickY, int posX, int posY, int width_box, int height_box) {
+
+    if (clickX < posX || clickX > posX + width_box || clickY < posY || clickY > posY + height_box) {
+    	// Le click n'est pas sur le bouton
+    	return 0;
+    } else {
+    	return 1;
+    }
 }
