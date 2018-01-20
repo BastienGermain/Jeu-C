@@ -34,6 +34,7 @@ typedef struct Monde {
 void initialiserMonde(Monde *monde);
 int afficheMonde(Monde monde);
 void viderMonde(Monde *monde);
+void effaceText(int hauteurDepart);
 
 /* unite.c */
 int creerUnite(char type, UListe *ULst);

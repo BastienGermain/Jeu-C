@@ -21,7 +21,6 @@ int afficheMonde(Monde monde) {
 
 	
 	/* Créer les personnages */
-	//MLV_Image *serfB, *guerrierB, *serfR, *guerrierR;
 	MLV_Image *serf, *guerrier;
 
 	int i, j;
@@ -39,57 +38,30 @@ int afficheMonde(Monde monde) {
 
 			if (monde.plateau[i][j] != NULL){
 
-				MLV_Color color;
-
 				/* Test du propriétaire & charger les images */
 				if (monde.plateau[i][j]->couleur == ROUGE){
-					serf=MLV_load_image( "image/serf-r.png" );
-					guerrier=MLV_load_image( "image/guerrier-r.png" );					
+					serf = MLV_load_image( "image/serf-r.png" );
+					guerrier = MLV_load_image( "image/guerrier-r.png" );					
 				} else {
-					serf=MLV_load_image( "image/serf-b.png" );
-					guerrier=MLV_load_image( "image/guerrier-b.png" );	
+					serf = MLV_load_image( "image/serf-b.png" );
+					guerrier = MLV_load_image( "image/guerrier-b.png" );
 				}
 
 				/* Redimensionner les images */
-				MLV_resize_image_with_proportions( serf, CASE, CASE);
-				MLV_resize_image_with_proportions( guerrier, CASE, CASE);	
+				MLV_resize_image_with_proportions(serf, CASE, CASE);
+				MLV_resize_image_with_proportions(guerrier, CASE, CASE);	
 
 				/* Test du type d'unité */
 				if (monde.plateau[i][j]->type == SERF){
-					MLV_draw_image( serf,j*CASE, i*CASE);
+					MLV_draw_image(serf, j*CASE, i*CASE);
 				} else {
-					MLV_draw_image( guerrier,j*CASE, i*CASE);
+					MLV_draw_image(guerrier, j*CASE, i*CASE);
 				}
 			}
 
 		}
 
 	}
-
-	/* On affiche sur quelle case est la souris */
-	while(0){
-
-	int x,y;
-
-        MLV_draw_text(
-            555,15,
-            "x : %d y : %d",
-            MLV_rgba(0,0,0,255),
-            x/CASE, y/CASE 
-            );
-
-        MLV_get_mouse_position( &x, &y );
-        MLV_draw_text(
-            555,15,
-            "x : %d y : %d",
-            MLV_rgba(90,90,90,255),
-            x/CASE, y/CASE 
-            );
-                
-        // On met à jour l'affichage.
-        MLV_actualise_window();
-
-    }
 
 
 	//
@@ -119,4 +91,10 @@ void viderMonde(Monde *monde) {
 	monde->rouge = NULL;
 	monde->bleu = NULL;
 
+}
+
+void effaceText(int hauteurDepart) {
+	MLV_draw_filled_rectangle(18*CASE, hauteurDepart, 7*CASE, 12*CASE - hauteurDepart, MLV_rgba(0,0,0,255));
+
+	MLV_actualise_window();
 }

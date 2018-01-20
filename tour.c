@@ -61,13 +61,7 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
 
 void gererTour(Monde *monde) {
 
-	/* Efface les anciens textes */
-	MLV_draw_text(
-        19*CASE,15,
-        "Tour : %d",
-        MLV_rgba(0,0,0,255),
-        monde->tour
-    );
+	effaceText(0);
 
     monde->tour += 1;
 
@@ -80,9 +74,19 @@ void gererTour(Monde *monde) {
 
     MLV_actualise_window();
 
-	printf("Joueur rouge :\n");
+	MLV_draw_text(
+        19*CASE,40,
+        "Joueur Rouge",
+        MLV_rgba(200,200,200,255)
+    );
 	gererDemiTour(ROUGE, monde);
 
-	printf("Joueur bleu :\n");
+	effaceText(40);
+
+	MLV_draw_text(
+        19*CASE,40,
+        "Joueur Bleu",
+        MLV_rgba(200,200,200,255)
+    );
 	gererDemiTour(BLEU, monde);	
 }
