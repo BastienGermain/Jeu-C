@@ -8,7 +8,7 @@ void initialiserMonde(Monde *monde) {
 	monde->tour = 0;
 	monde->rouge = NULL;
 	monde->bleu = NULL;
-
+	
 	/* Parcours du plateau de jeu */
 	int i, j;
 	for (i = 0; i < LONG; i++){
@@ -16,31 +16,28 @@ void initialiserMonde(Monde *monde) {
 			monde->plateau[i][j] = NULL;
 		}
 	}
+
+	int p = 0;
+	int nb1 = 0;
+	int nb2 = 0;
+	int piege1=0;
+	int piege2=0;
+
+	while(p<2){
+	nb1 = rand_a_b(0,LONG);
+	nb2 = rand_a_b(0,LARG);
+	piege1=monde->piege[nb1][nb2];
+	piege2=monde->piege[nb1][nb2];	
+	p++;
+	}
+	
+
 }
 
 /* Retourne un nombre aleatoire */
 // On suppose a<b
 int rand_a_b(int a, int b){
 return rand()%(b-a) +a;
-}
-
-
-void pieger(){
-
-	printf("ok\n");
-	/* Essai de creer des cases pieges mais pour l'instant c'est un fiasco */
-	
-	int p = 0;
-	int nombre_aleatoire1 = 0;
-	int nombre_aleatoire2 = 0;
-
-		while(p<2){
-		nombre_aleatoire1 = rand_a_b(0,LONG);
-		nombre_aleatoire2 = rand_a_b(0,LARG);
-		MLV_draw_filled_rectangle(nombre_aleatoire1*CASE, nombre_aleatoire2*CASE, CASE, CASE, MLV_COLOR_ORANGE_RED);
-		p++;
-		}
-
 }
 
 int afficheMonde(Monde monde) {
@@ -84,10 +81,10 @@ int afficheMonde(Monde monde) {
 			}
 
 		}
+		// Dessiner les pieges ici
+		/* MLV_draw_filled_rectangle(nb1*CASE,nb2*CASE, CASE, CASE, MLV_COLOR_ORANGE_RED); */
 
 	}
-
-	pieger();
 
 	// Met a jour l'affichage
 	MLV_actualise_window();

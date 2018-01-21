@@ -25,6 +25,7 @@ typedef struct Unite{
 
 typedef struct Monde {
 	Unite *plateau[LONG][LARG]; /* tableau de pointeurs sur Unite */
+	int piege[LONG][LARG]; /* tableau de pointeurs sur Unite pour les pieges */
 	int tour; /* Numero du tour */
 	UListe rouge, bleu; /*Listes des deux joueurs*/
 } Monde; 
