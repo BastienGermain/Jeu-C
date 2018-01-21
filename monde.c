@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <MLV/MLV_all.h>
 #include "header.h"
-#include <time.h>
 
 void initialiserMonde(Monde *monde) {
 	monde->tour = 0;
@@ -17,27 +16,14 @@ void initialiserMonde(Monde *monde) {
 		}
 	}
 
+	/* créer les pièges sur des cases au hasard */
 	int p = 0;
-	int nb1 = 0;
-	int nb2 = 0;
-	int piege1=0;
-	int piege2=0;
+	while (p < NBPIEGES) {
+		monde->piege[p][0] = rand() % LONG;
+		monde->piege[p][1] = rand() % LARG;	
+		p++;
+	}	
 
-	while(p<2){
-	nb1 = rand_a_b(0,LONG);
-	nb2 = rand_a_b(0,LARG);
-	piege1=monde->piege[nb1][nb2];
-	piege2=monde->piege[nb1][nb2];	
-	p++;
-	}
-	
-
-}
-
-/* Retourne un nombre aleatoire */
-// On suppose a<b
-int rand_a_b(int a, int b){
-return rand()%(b-a) +a;
 }
 
 int afficheMonde(Monde monde) {
@@ -81,8 +67,14 @@ int afficheMonde(Monde monde) {
 			}
 
 		}
-		// Dessiner les pieges ici
-		/* MLV_draw_filled_rectangle(nb1*CASE,nb2*CASE, CASE, CASE, MLV_COLOR_ORANGE_RED); */
+
+		// Dessiner les pieges
+		int p = 0;
+
+		while (p < NBPIEGES) {
+			MLV_draw_filled_rectangle(monde.piege[p][0]*CASE, monde.piege[p][1]*CASE, CASE, CASE, MLV_COLOR_ORANGE_RED);
+			p++;
+		}
 
 	}
 
