@@ -28,7 +28,7 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
 
         MLV_draw_text(
 	        (LARG+1)*CASE,165,
-	        "Clickez sur une case pour attaquer ou vous déplacer",
+	        "Cliquez sur une case pour attaquer ou vous déplacer",
 	        MLV_rgba(255,255,255,255)
 	    );
 

@@ -104,8 +104,14 @@ void positionneUnite(UListe *liste, char type, Monde *monde, char couleur) {
 
 		MLV_wait_mouse(&caseY, &caseX);
 
+		if(couleur=='R'){
 		caseX /= CASE;
-		caseY /= CASE;
+		caseY=0;
+		}
+		if(couleur=='B'){
+		caseX /= CASE;
+		caseY=LONG-1;
+		}
 
 		/* Si la case ciblée est hors du plateau ou que la case est déjà occupée */
 		while (caseX < 0 || caseX > (LARG - 1) || caseY < 0 || caseY > (LONG - 1) || placerAuMonde(*liste, monde, caseX, caseY, couleur) == 0){
@@ -113,10 +119,18 @@ void positionneUnite(UListe *liste, char type, Monde *monde, char couleur) {
 			errorMessage("Case occupée ! Réessayer !");
 			
 			MLV_wait_mouse(&caseY, &caseX);
-
+			
+			if(couleur=='R'){
 			caseX /= CASE;
-			caseY /= CASE;
+			caseY=0;
+			}
+			if(couleur=='B'){
+			caseX /= CASE;
+			caseY=LONG-1;
+			}
+
 		}
+
 	}
 
 	afficheMonde(*monde);
