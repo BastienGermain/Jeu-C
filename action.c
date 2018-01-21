@@ -105,7 +105,7 @@ int attaquer(Unite *unite, Monde *monde, int cibleX, int cibleY) {
 
 int deplacerOuAttaquer(Unite *unite, Monde *monde, int destX, int destY) {
 	/* Si la case ciblée est hors du plateau */
-	if (destX < 0 || destX > 18 || destY < 0 || destX > 12){
+	if (destX < 0 || destX > (LARG - 1) || destY < 0 || destY > (LONG - 1)){
 		return -1;
 	}
 	

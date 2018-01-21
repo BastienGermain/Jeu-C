@@ -2,8 +2,8 @@
 #define HEADER_H
 
 /* dimension du monde en nombre de cases */
-#define LONG 12
-#define LARG 18
+#define LONG 10
+#define LARG 10
 /* l'origine est en haut à gauche */
 
 /* taille d'une case du plateau */
@@ -57,13 +57,14 @@ void gererTour(Monde *monde);
 
 /* partie.c */
 void gererPartie(void);
-void positionneUnite(UListe *liste, char type, Monde *monde, int caseX, int caseY, char couleur);
+void positionneUnite(UListe *liste, char type, Monde *monde, char couleur);
 int testGagnant(Monde monde);
-int demandeArretPartie(void);
+int demandeOuiNon(char question[]);
 
 /* mlv.c */
 void effaceText(int hauteurDepart);
 void creerButton(char message[], int posX, int posY, int *width_text, int *height_text);
 int clickButton(int clickX, int clickY, int posX, int posY, int width_box, int height_box);
+void errorMessage(char message[]);
 
 #endif

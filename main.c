@@ -6,14 +6,18 @@
 int main()
 {
 	/* Créé et affiche la fenêtre */
-	MLV_create_window( "plateau", "plateau", 27*CASE, 12*CASE );
+	MLV_create_window( "plateau", "plateau", (LARG+9)*CASE, LONG*CASE );
 
-	gererPartie();
+	int nouvellePartie = 1;
+		
+	while (nouvellePartie == 1) {
+		// on (re)commence une partie
+		gererPartie();
 
-	//
-	// Ferme la fenêtre
-	//
+		nouvellePartie = demandeOuiNon("Voulez vous recommencer une partie ?");
+	} 
+		
 	MLV_free_window();
-
+	
 	return 0;
 }

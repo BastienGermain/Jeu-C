@@ -62,20 +62,20 @@ void afficherInfosUnite(Unite unite) {
 	effaceText(60);
 
 	MLV_draw_text(
-        19*CASE, 75,
+        (LARG+1)*CASE, 75,
         "Unité sélectionnée :",
         MLV_rgba(255,255,255,255)
     );
 
     MLV_draw_text(
-        19*CASE, 105,
+        (LARG+1)*CASE, 105,
         "Type : %c",
         MLV_rgba(255,255,255,255),
         unite.type
     );
 
     MLV_draw_text(
-        19*CASE, 135,
+        (LARG+1)*CASE, 135,
         "Position : %d, %d",
         MLV_rgba(255,255,255,255),
         unite.posX, unite.posY

@@ -5,7 +5,7 @@
 
 /* Efface le texte dans la partie noire à partir de la hauteur en paramètre */
 void effaceText(int hauteurDepart) {
-	MLV_draw_filled_rectangle(18*CASE, hauteurDepart, 9*CASE, 12*CASE - hauteurDepart, MLV_rgba(0,0,0,255));
+	MLV_draw_filled_rectangle(LARG*CASE, hauteurDepart, 9*CASE, LONG*CASE - hauteurDepart, MLV_rgba(0,0,0,255));
 
 	MLV_actualise_window();
 }
@@ -27,7 +27,7 @@ void creerButton(char message[], int posX, int posY, int *width_box, int *height
         MLV_TEXT_CENTER
     );
 
-    MLV_actualise_window();;
+    MLV_actualise_window();
 }
 
 int clickButton(int clickX, int clickY, int posX, int posY, int width_box, int height_box) {
@@ -38,4 +38,14 @@ int clickButton(int clickX, int clickY, int posX, int posY, int width_box, int h
     } else {
     	return 1;
     }
+}
+
+void errorMessage(char message[]) {
+	MLV_draw_text(
+        (LARG+1)*CASE,(LONG-1)*CASE,
+        message,
+        MLV_rgba(255,100,100,255)
+    );
+
+    MLV_actualise_window();
 }
