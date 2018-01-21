@@ -23,6 +23,11 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
         afficheMonde(*monde);
         afficherInfosUnite(*actuel);
 
+        /* indique l'unité sélectionnée */
+        MLV_draw_filled_circle(actuel->posY*CASE + 10, actuel->posX*CASE + 10, 8, MLV_rgba(0,240,0,255));
+
+       	MLV_actualise_window();
+
         /* demande au joueur une case à cibler */
         int caseX, caseY, code;
 
