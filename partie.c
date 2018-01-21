@@ -87,24 +87,43 @@ void positionneUnite(UListe *liste, char type, Monde *monde, char couleur) {
 
 		MLV_draw_text(
 	        (LARG+1)*CASE,45,
-	        "Clickez sur une case pour positionner votre unité",
+	        "Cliquez sur une case pour positionner votre unité",
 	        MLV_rgba(255,255,255,255)
 	    );
 
-	    effaceText(60);
 
+		if(couleur=='R'){
+		MLV_draw_text(
+	        (LARG+1)*CASE,75,
+	        "Selectionner une case de la première colonne",
+	        MLV_rgba(255,255,255,255)
+	    );
+		}
+		else{
 	    MLV_draw_text(
 	        (LARG+1)*CASE,75,
+	        "Selectionner une case de la dernière colonne",
+	        MLV_rgba(255,255,255,255)
+	    );
+
+		}
+
+	    effaceText(100);
+
+	    MLV_draw_text(
+	        (LARG+1)*CASE,100,
 	        "Unité de type : %c",
 	        MLV_rgba(255,255,255,255),
 	        type
 	    );
+
 
 	    MLV_actualise_window();
 
 		MLV_wait_mouse(&caseY, &caseX);
 
 		if(couleur=='R'){
+
 		caseX /= CASE;
 		caseY=0;
 		}

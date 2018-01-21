@@ -25,41 +25,34 @@ return rand()%(b-a) +a;
 }
 
 
+void pieger(){
+
+	printf("ok\n");
+	/* Essai de creer des cases pieges mais pour l'instant c'est un fiasco */
+	
+	int p = 0;
+	int nombre_aleatoire1 = 0;
+	int nombre_aleatoire2 = 0;
+
+		while(p<2){
+		nombre_aleatoire1 = rand_a_b(0,LONG);
+		nombre_aleatoire2 = rand_a_b(0,LARG);
+		MLV_draw_filled_rectangle(nombre_aleatoire1*CASE, nombre_aleatoire2*CASE, CASE, CASE, MLV_COLOR_ORANGE_RED);
+		p++;
+		}
+
+}
+
 int afficheMonde(Monde monde) {
 
 	MLV_Image *serf, *guerrier;
 
 	int i, j;
-	
+
 	for (i = 0; i < LONG; i++){
 
 		for (j = 0; j < LARG; j++) {
-
-
-	/* Essai de creer des cases pieges mais pour l'instant c'est un fiasco */
-	/*
-	int p = 0;
-	int nombre_aleatoire1 = 0;
-	int nombre_aleatoire2 = 0;
-
-		if(p<2){
-
-		nombre_aleatoire1 = rand_a_b(0,LONG);
-		nombre_aleatoire2 = rand_a_b(0,LARG);
-
-		MLV_draw_filled_rectangle(nombre_aleatoire1*CASE, nombre_aleatoire2*CASE, CASE, CASE, MLV_COLOR_ORANGE_RED);
 		
-			if ((i + j) % 2 == 0 && j!=nombre_aleatoire1 && i!=nombre_aleatoire2){
-				MLV_draw_filled_rectangle(j*CASE, i*CASE, CASE, CASE, MLV_rgba(200,200,200,255));
-			} else {
-				MLV_draw_filled_rectangle(j*CASE, i*CASE, CASE, CASE, MLV_rgba(90,90,90,255));
-			}
-
-		p++;
-		}
-		*/
-	
-
 			/* Création du damier */
 			if ((i + j) % 2 == 0){
 				MLV_draw_filled_rectangle(j*CASE, i*CASE, CASE, CASE, MLV_rgba(200,200,200,255));
@@ -93,6 +86,8 @@ int afficheMonde(Monde monde) {
 		}
 
 	}
+
+	pieger();
 
 	// Met a jour l'affichage
 	MLV_actualise_window();
