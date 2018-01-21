@@ -19,7 +19,7 @@ void initialiserMonde(Monde *monde) {
 	/* créer les pièges sur des cases au hasard */
 	int p = 0;
 	while (p < NBPIEGES) {
-		monde->piege[p][0] = rand() % LONG;
+		monde->piege[p][0] = 1 + rand() % (LONG-2);
 		monde->piege[p][1] = rand() % LARG;	
 		p++;
 	}	

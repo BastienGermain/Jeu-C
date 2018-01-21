@@ -10,7 +10,7 @@
 #define CASE 50
 
 /* nb de pièges sur le plateau */
-#define NBPIEGES 3
+#define NBPIEGES 10
 
 #define ROUGE 'R' /* identifiant du premier joueur */ 
 #define BLEU 'B' /* identifiant du deuxieme joueur */

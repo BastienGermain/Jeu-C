@@ -5,6 +5,8 @@
 
 void gererPartie(void) {
 
+	effaceText(0);
+
 	Monde monde;
 	initialiserMonde(&monde);
 
