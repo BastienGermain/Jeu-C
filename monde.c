@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <MLV/MLV_all.h>
 #include "header.h"
 
@@ -18,6 +19,7 @@ void initialiserMonde(Monde *monde) {
 
 	/* créer les pièges sur des cases au hasard */
 	int p = 0;
+	srand(time(NULL)); // nécessaire pour l'aléatoire
 	while (p < NBPIEGES) {
 		monde->piege[p][0] = 1 + rand() % (LONG-2);
 		monde->piege[p][1] = rand() % LARG;	

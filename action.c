@@ -153,6 +153,19 @@ int deplacerOuAttaquer(Unite *unite, Monde *monde, int destX, int destY) {
 		/* Si la case n'est pas occupée, on se déplace */
 		deplacerUnite(unite, monde, destX, destY);
 
+		/* Si le SERF arrive au bout du plateau on le transforme en GUERRIER */
+		if (unite->type == SERF) {
+			if (quelProprietaire(unite, *monde) == ROUGE) {
+				if (destY == LONG-1) {
+					unite->type = GUERRIER;
+				}
+			} else {
+				if (destY == 0) {
+					unite->type = GUERRIER;
+				}
+			}
+		}
+
 		return 1;
 	}
 }
@@ -165,7 +178,7 @@ int estVoisine(int posX, int posY, int destX, int destY) {
 	/* Test si la case ciblée est la même que la case de l'unité */
 	if (diffX != 0 || diffY != 0) {
 		/* Test si la case ciblée n'est pas une des 8 cases autour de l'unité */
-		if (diffX > 1 || diffX < -1 || diffY > 1 || diffY < -1) {
+		if (diffX > 3 || diffX < -3 || diffY > 3 || diffY < -3) {
 			return 0;
 		} else {
 			// La case est voisine
