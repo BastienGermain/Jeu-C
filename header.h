@@ -10,7 +10,7 @@
 #define CASE 50
 
 /* nb de pièges sur le plateau */
-#define NBPIEGES 10
+#define NBPIEGES 15
 
 #define ROUGE 'R' /* identifiant du premier joueur */ 
 #define BLEU 'B' /* identifiant du deuxieme joueur */
@@ -62,13 +62,14 @@ void gererTour(Monde *monde);
 /* partie.c */
 void gererPartie(void);
 void positionneUnite(UListe *liste, char type, Monde *monde, char couleur);
+void placeBonCote(int *caseX, int *caseY, char couleur);
 int testGagnant(Monde monde);
-int demandeOuiNon(char question[]);
 
 /* mlv.c */
 void effaceText(int hauteurDepart);
 void creerButton(char message[], int posX, int posY, int *width_text, int *height_text);
 int clickButton(int clickX, int clickY, int posX, int posY, int width_box, int height_box);
 void errorMessage(char message[]);
+int demandeOuiNon(char question[]);
 
 #endif

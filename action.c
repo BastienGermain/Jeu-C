@@ -14,12 +14,14 @@ void deplacerUnite(Unite *unite, Monde *monde, int destX, int destY) {
 			}
 		}
 	}
+
 	/* On inscrit l'unité dans sa nouvelle case */
 	monde->plateau[destX][destY] = unite;
 
 	/* On met à jour les infos de l'unité */
 	unite->posX = destX;
 	unite->posY = destY;
+	
 }
 
 void enleverUnite(Unite *unite, Monde *monde) {
@@ -104,6 +106,7 @@ int attaquer(Unite *unite, Monde *monde, int cibleX, int cibleY) {
 }
 
 int deplacerOuAttaquer(Unite *unite, Monde *monde, int destX, int destY) {
+	
 	/* Si la case ciblée est hors du plateau */
 	if (destX < 0 || destX > (LARG - 1) || destY < 0 || destY > (LONG - 1)){
 		return -1;
@@ -121,6 +124,16 @@ int deplacerOuAttaquer(Unite *unite, Monde *monde, int destX, int destY) {
 				}
 			}
 		}
+	}
+
+	/* On teste si la case ciblée n'est pas un piège */
+	int p = 0;
+	while (p < NBPIEGES) {
+		if (monde->piege[p][0] == destY && monde->piege[p][1] == destX) {
+			return -4;
+		}
+
+		p++;
 	}
 
 	/* On regarde si la case ciblée est déjà occupée */
@@ -144,16 +157,18 @@ int deplacerOuAttaquer(Unite *unite, Monde *monde, int destX, int destY) {
 	}
 }
 
+/* Test si la case est voisine de l'unité */
 int estVoisine(int posX, int posY, int destX, int destY) {
 	int diffX = posX - destX;
-	int diffY= posY - destY;
+	int diffY = posY - destY;
 
 	/* Test si la case ciblée est la même que la case de l'unité */
 	if (diffX != 0 || diffY != 0) {
 		/* Test si la case ciblée n'est pas une des 8 cases autour de l'unité */
-		if (diffX > 1 || diffX < -1 || diffY > 1 || diffY < -1){
+		if (diffX > 1 || diffX < -1 || diffY > 1 || diffY < -1) {
 			return 0;
 		} else {
+			// La case est voisine
 			return 1;
 		}
 	} else {
@@ -161,6 +176,8 @@ int estVoisine(int posX, int posY, int destX, int destY) {
 	}	
 }
 
+
+/* Détermine le propriétaire d'une unité */
 char quelProprietaire(Unite *unite, Monde monde) {
 
     while (monde.rouge != NULL)

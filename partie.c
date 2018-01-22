@@ -85,33 +85,30 @@ void positionneUnite(UListe *liste, char type, Monde *monde, char couleur) {
 		printf("erreur allocation memoire\n");
 	} else {
 
-		int caseX, caseY;
-
 		MLV_draw_text(
 	        (LARG+1)*CASE,45,
 	        "Cliquez sur une case pour positionner votre unité",
 	        MLV_rgba(255,255,255,255)
 	    );
 
-
-		if(couleur=='R'){
-		MLV_draw_text(
-	        (LARG+1)*CASE,75,
-	        "Selectionner une case de la première colonne",
-	        MLV_rgba(255,255,255,255)
-	    );
-		}
-		else{
-	    MLV_draw_text(
-	        (LARG+1)*CASE,75,
-	        "Selectionner une case de la dernière colonne",
-	        MLV_rgba(255,255,255,255)
-	    );
-
+		/* Message d'information pour placer les unités */
+		if (couleur == ROUGE){
+			MLV_draw_text(
+		        (LARG+1)*CASE,75,
+		        "Sélectionner une case de la première colonne",
+		        MLV_rgba(255,255,255,255)
+		    );
+		} else {
+		    MLV_draw_text(
+		        (LARG+1)*CASE,75,
+		        "Sélectionner une case de la dernière colonne",
+		        MLV_rgba(255,255,255,255)
+		    );
 		}
 
 	    effaceText(100);
 
+	    /* Annonce le type d'unité à placer */
 	    MLV_draw_text(
 	        (LARG+1)*CASE,100,
 	        "Unité de type : %c",
@@ -122,39 +119,39 @@ void positionneUnite(UListe *liste, char type, Monde *monde, char couleur) {
 
 	    MLV_actualise_window();
 
-		MLV_wait_mouse(&caseY, &caseX);
+	    int caseX, caseY;
 
-		if(couleur=='R'){
-
-		caseX /= CASE;
-		caseY=0;
-		}
-		if(couleur=='B'){
-		caseX /= CASE;
-		caseY=LONG-1;
-		}
+		placeBonCote(&caseX, &caseY, couleur);	
 
 		/* Si la case ciblée est hors du plateau ou que la case est déjà occupée */
 		while (caseX < 0 || caseX > (LARG - 1) || caseY < 0 || caseY > (LONG - 1) || placerAuMonde(*liste, monde, caseX, caseY, couleur) == 0){
 
 			errorMessage("Case occupée ! Réessayer !");
 			
-			MLV_wait_mouse(&caseY, &caseX);
-			
-			if(couleur=='R'){
-			caseX /= CASE;
-			caseY=0;
-			}
-			if(couleur=='B'){
-			caseX /= CASE;
-			caseY=LONG-1;
-			}
+			placeBonCote(&caseX, &caseY, couleur);		
 
 		}
 
 	}
 
 	afficheMonde(*monde);
+}
+
+/* Permet de placer les unités du bon côté du plateau selon leur couleur */
+void placeBonCote(int *caseX, int *caseY, char couleur) {
+	MLV_wait_mouse(caseY, caseX);
+			
+	/* Place les unites rouges sur la première colonne */
+	if(couleur == ROUGE){
+		*caseX /= CASE;
+		*caseY = 0;
+	}
+
+	/* Place les unités bleues sur la dernière colonne */
+	if(couleur == BLEU){
+		*caseX /= CASE;
+		*caseY = LONG-1;
+	}
 }
 
 int testGagnant(Monde monde) {
@@ -169,38 +166,4 @@ int testGagnant(Monde monde) {
 		// Pas de gagnant
 		return 0;
 	}
-}
-
-int demandeOuiNon(char question[]) {
-
-	effaceText(30);
-
-	MLV_draw_text(
-        (LARG+1)*CASE,45,
-        question,
-        MLV_rgba(255,255,255,255)
-    );
-
-	int width_box_oui, height_box_oui, width_box_non, height_box_non;
-
-	creerButton("Oui", (LARG+1)*CASE, 2*CASE, &width_box_oui, &height_box_oui);
-	creerButton("Non", (LARG+1)*CASE, 4*CASE, &width_box_non, &height_box_non);
-
-    int reponseClickOui, reponseClickNon;
-    while (reponseClickOui != 1 && reponseClickNon != 1){
-    	int clickX, clickY;
-		MLV_wait_mouse(&clickX, &clickY);
-
-    	reponseClickOui = clickButton(clickX, clickY, (LARG+1)*CASE, 2*CASE, width_box_oui, height_box_oui);
-    	reponseClickNon = clickButton(clickX, clickY, (LARG+1)*CASE, 4*CASE, width_box_non, height_box_non);
-    }
-
-    if (reponseClickOui == 1) {
-    	// Oui
-    	return 1;
-    } else {
-    	// Non
-		return 0;
-	}
-
 }

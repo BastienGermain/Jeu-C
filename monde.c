@@ -68,7 +68,7 @@ int afficheMonde(Monde monde) {
 
 		}
 
-		// Dessiner les pieges
+		// Dessine les pieges
 		int p = 0;
 
 		while (p < NBPIEGES) {
@@ -78,9 +78,7 @@ int afficheMonde(Monde monde) {
 
 	}
 
-	// Met a jour l'affichage
 	MLV_actualise_window();
-
 
 }
 

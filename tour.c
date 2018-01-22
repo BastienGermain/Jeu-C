@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "header.h"
 #include <MLV/MLV_all.h>
 
+/* Test la couleur du joueur */
 void gererDemiTour(char joueur, Monde *monde) {
 	if (joueur == ROUGE){
 		deroulementDemiTour(monde->rouge, monde);
@@ -77,6 +77,7 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
 
     effaceText(60);
 
+    /* Demande la validation de la fin du tour */
     creerButton("Fin du tour", (LARG+1)*CASE, (LONG-2)*CASE, &width_box, &height_box);
 
     int reponseClick;
@@ -90,6 +91,7 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
 
 }
 
+/* Gère un tour complet (les deux joeurs jouent) */
 void gererTour(Monde *monde) {
 
 	effaceText(0);
@@ -108,6 +110,7 @@ void gererTour(Monde *monde) {
         "Joueur Rouge",
         MLV_rgba(255,255,255,255)
     );
+
 	gererDemiTour(ROUGE, monde);
 
 	effaceText(45);
@@ -117,5 +120,6 @@ void gererTour(Monde *monde) {
         "Joueur Bleu",
         MLV_rgba(255,255,255,255)
     );
+
 	gererDemiTour(BLEU, monde);	
 }
