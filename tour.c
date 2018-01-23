@@ -24,7 +24,10 @@ void deroulementDemiTour(UListe listeJoueur, Monde *monde) {
         afficherInfosUnite(*actuel);
 
         /* indique l'unité sélectionnée */
-        MLV_draw_filled_circle(actuel->posY*CASE + 10, actuel->posX*CASE + 10, 8, MLV_rgba(0,240,0,255));
+        MLV_draw_filled_rectangle(actuel->posY*CASE, actuel->posX*CASE, 3, CASE, MLV_rgba(230,230,30,255));
+        MLV_draw_filled_rectangle(actuel->posY*CASE, actuel->posX*CASE, CASE, 3, MLV_rgba(230,230,30,255));
+        MLV_draw_filled_rectangle((actuel->posY+1)*CASE - 3, actuel->posX*CASE, 3, CASE, MLV_rgba(230,230,30,255));
+        MLV_draw_filled_rectangle(actuel->posY*CASE, (actuel->posX+1)*CASE - 3, CASE, 3, MLV_rgba(230,230,30,255));
 
        	MLV_actualise_window();
 

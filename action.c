@@ -82,7 +82,7 @@ void supprimerUniteListe(Unite *aSupprime, UListe *liste) {
 
 int attaquer(Unite *unite, Monde *monde, int cibleX, int cibleY) {
 
-	/* Si l'unité attaquant est un guerrier, elle gagne tout le temps */
+	/* Si l'unité attaquante est un guerrier, elle gagne tout le temps */
 
 	if (unite->type == GUERRIER){
 		/* On supprime l'unité attaquée */
@@ -175,10 +175,12 @@ int estVoisine(int posX, int posY, int destX, int destY) {
 	int diffX = posX - destX;
 	int diffY = posY - destY;
 
+	int ptMouvement = 1; //Nb de cases possibles pour le déplacement
+
 	/* Test si la case ciblée est la même que la case de l'unité */
 	if (diffX != 0 || diffY != 0) {
 		/* Test si la case ciblée n'est pas une des 8 cases autour de l'unité */
-		if (diffX > 3 || diffX < -3 || diffY > 3 || diffY < -3) {
+		if (diffX > ptMouvement || diffX < -ptMouvement || diffY > ptMouvement || diffY < -ptMouvement) {
 			return 0;
 		} else {
 			// La case est voisine

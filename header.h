@@ -2,15 +2,15 @@
 #define HEADER_H
 
 /* dimension du monde en nombre de cases */
-#define LONG 10
-#define LARG 10
+#define LONG 8
+#define LARG 8
 /* l'origine est en haut à gauche */
 
 /* taille d'une case du plateau */
 #define CASE 50
 
 /* nb de pièges sur le plateau */
-#define NBPIEGES 15
+#define NBPIEGES 8
 
 #define ROUGE 'R' /* identifiant du premier joueur */ 
 #define BLEU 'B' /* identifiant du deuxieme joueur */

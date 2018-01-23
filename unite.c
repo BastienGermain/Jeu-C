@@ -78,7 +78,7 @@ void afficherInfosUnite(Unite unite) {
         (LARG+1)*CASE, 135,
         "Position : %d, %d",
         MLV_rgba(255,255,255,255),
-        unite.posX, unite.posY
+        unite.posY + 1, unite.posX + 1
 
     );
 

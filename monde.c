@@ -74,7 +74,7 @@ int afficheMonde(Monde monde) {
 		int p = 0;
 
 		while (p < NBPIEGES) {
-			MLV_draw_filled_rectangle(monde.piege[p][0]*CASE, monde.piege[p][1]*CASE, CASE, CASE, MLV_COLOR_ORANGE_RED);
+			MLV_draw_filled_rectangle(monde.piege[p][0]*CASE, monde.piege[p][1]*CASE, CASE, CASE, MLV_rgba(230,130,30,255));
 			p++;
 		}
 
